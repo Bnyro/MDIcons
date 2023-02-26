@@ -24,6 +24,9 @@
 		const text = await response.text();
 		const json = removeLine(text, 0);
 		icons = JSON.parse(json).icons;
+		icons.forEach((icon) => {
+			icon.url = `https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/${icon.name}/default/${icon['sizes_px'][0]}px.svg`;
+		});
 		updateIcons(icons);
 	};
 
@@ -42,6 +45,22 @@
 		updateIcons(filteredIcons);
 	};
 
+	const download = (icon) => {
+		fetch(icon.url)
+			.then((resp) => resp.blob())
+			.then((blob) => {
+				const url = window.URL.createObjectURL(blob);
+				const a = document.createElement('a');
+				a.style.display = 'none';
+				a.href = url;
+				a.download = `${icon.name}.svg`;
+				document.body.appendChild(a);
+				a.click();
+				window.URL.revokeObjectURL(url);
+			})
+			.catch(() => alert('Download failed!'));
+	};
+
 	onMount(() => {
 		fetchIcons();
 	});
@@ -51,13 +70,9 @@
 	<input bind:value={searchQuery} on:keyup={onQueryChanged} type="text" placeholder="Search" />
 	<div id="icons">
 		{#each visibleIcons as icon}
-			<span>
-				<img
-					src="https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/{icon.name}/default/{icon[
-						'sizes_px'
-					][0]}px.svg"
-					alt=""
-				/>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<span on:click={download(icon)}>
+				<img src={icon.url} alt="" />
 				<p>{rewriteName(icon)}</p>
 			</span>
 		{/each}
