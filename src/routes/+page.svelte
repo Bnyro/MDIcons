@@ -7,6 +7,8 @@
 	let icons = [];
 	let visibleIcons = [];
 	let searchQuery = '';
+	let filled = false;
+	let weight = 400;
 
 	const iconsUrl = 'https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true';
 	const proxiedUrl = 'https://s.bnyro.ga/proxy?url=' + encodeURIComponent(iconsUrl);
@@ -67,7 +69,15 @@
 </script>
 
 <section>
-	<input bind:value={searchQuery} on:keyup={onQueryChanged} type="text" placeholder="Search" />
+	<div id="filters">
+		<label class="container"
+			>Filled
+			<input type="checkbox" bind:checked={filled} />
+			<span class="checkmark" />
+		</label>
+		<input class="slider" type="range" min="100" max="700" step="100" bind:value={weight} />
+		<input bind:value={searchQuery} on:keyup={onQueryChanged} type="text" placeholder="Search" />
+	</div>
 	<div id="icons">
 		{#each visibleIcons as icon}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -87,7 +97,13 @@
 		align-items: center;
 	}
 
-	input {
+	#filters {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	input[type='text'] {
 		margin: 1rem 0;
 		padding: 1rem;
 		width: 30%;
@@ -96,6 +112,97 @@
 		border: none;
 		outline: none;
 		color: var(--text);
+	}
+
+	input[type='range'] {
+		border-radius: 1rem;
+		-webkit-appearance: none;
+		appearance: none;
+		padding: 0.7rem;
+		background: var(--surface);
+		outline: none;
+		opacity: 0.7;
+		-webkit-transition: 0.2s;
+		transition: opacity 0.2s;
+	}
+
+	input[type='range']:hover {
+		opacity: 1;
+		cursor: pointer;
+	}
+
+	input[type='range']::-webkit-slider-thumb,
+	input[type='range']::-moz-range-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		padding: 0.2rem;
+		background: var(--accent);
+		border-radius: 1rem;
+	}
+
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		padding-left: 35px;
+		cursor: pointer;
+		font-size: 22px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.container input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	.checkmark {
+		margin-top: 6px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 20px;
+		width: 20px;
+		background-color: var(--text);
+	}
+
+	.container:hover input ~ .checkmark {
+		background-color: #ccc;
+	}
+
+	.container input:checked ~ .checkmark {
+		background-color: var(--accent);
+	}
+
+	.checkmark:after {
+		content: '';
+		position: absolute;
+		display: none;
+	}
+
+	.container input:checked ~ .checkmark:after {
+		display: block;
+	}
+
+	.container .checkmark:after {
+		left: 7px;
+		top: 3px;
+		width: 4px;
+		height: 9px;
+		border: solid white;
+		border-width: 0 3px 3px 0;
+		transform: rotate(45deg);
+	}
+
+	#filters > * {
+		margin-left: 1rem;
+		margin-right: 1rem;
 	}
 
 	#icons {
