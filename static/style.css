@@ -1,0 +1,13 @@
+:root {
+	--base: #191724;
+	--text: #e0def4;
+	--surface: #26233a;
+	--accent: #ebbcba;
+	--filter: invert(88%) sepia(14%) saturate(665%) hue-rotate(143deg) brightness(90%) contrast(86%);
+}
+
+html {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: var(--base);
+	color: var(--text);
+}
