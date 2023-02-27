@@ -4,10 +4,11 @@
 	import capitalize from '../lib/capizalize.js';
 	const visibleLimit = 100;
 
+	export let searchQuery = '';
+
 	let icons = [];
 	let categories = ['All'];
 	let visibleIcons = [];
-	export let searchQuery = '';
 	let filled = false;
 	let weight = 400;
 	let category = 'All';
