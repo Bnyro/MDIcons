@@ -49,6 +49,7 @@ input[type='range']::-moz-range-thumb {
 	border-radius: 1rem;
 }
 
+/* Checkbox input */
 .container {
 	display: flex;
 	align-items: center;
@@ -107,4 +108,22 @@ input[type='range']::-moz-range-thumb {
 	border: solid var(--base);
 	border-width: 0 3px 3px 0;
 	transform: rotate(45deg);
+}
+
+/* Select */
+select {
+	appearance: none;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: 1rem;
+	background-color: var(--surface);
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	color: var(--text);
+	cursor: pointer;
+}
+
+select:hover {
+	filter: brightness(1.2);
 }
