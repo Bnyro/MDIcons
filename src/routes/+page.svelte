@@ -18,6 +18,13 @@
 	};
 
 	const updateIcons = (i) => {
+		let props = '';
+		if (weight != 400) props += 'wght' + weight;
+		if (filled) props += 'fill1';
+		if (!props) props = 'default';
+		i.forEach((icon) => {
+			icon.url = `https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/${icon.name}/${props}/${icon['sizes_px'][0]}px.svg`;
+		});
 		visibleIcons = i.sort((a, b) => a.popularity < b.popularity).slice(0, visibleLimit);
 	};
 
@@ -26,9 +33,6 @@
 		const text = await response.text();
 		const json = removeLine(text, 0);
 		icons = JSON.parse(json).icons;
-		icons.forEach((icon) => {
-			icon.url = `https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/${icon.name}/default/${icon['sizes_px'][0]}px.svg`;
-		});
 		updateIcons(icons);
 	};
 
@@ -72,10 +76,18 @@
 	<div id="filters">
 		<label class="container"
 			>Filled
-			<input type="checkbox" bind:checked={filled} />
+			<input type="checkbox" bind:checked={filled} on:change={() => updateIcons(visibleIcons)} />
 			<span class="checkmark" />
 		</label>
-		<input class="slider" type="range" min="100" max="700" step="100" bind:value={weight} />
+		<input
+			class="slider"
+			type="range"
+			min="100"
+			max="700"
+			step="100"
+			bind:value={weight}
+			on:change={() => updateIcons(visibleIcons)}
+		/>
 		<input bind:value={searchQuery} on:keyup={onQueryChanged} type="text" placeholder="Search" />
 	</div>
 	<div id="icons">
@@ -169,11 +181,11 @@
 		left: 0;
 		height: 20px;
 		width: 20px;
-		background-color: var(--text);
+		background-color: var(--surface);
 	}
 
-	.container:hover input ~ .checkmark {
-		background-color: #ccc;
+	.container:hover input:not(:checked) ~ .checkmark {
+		filter: brightness(1.2);
 	}
 
 	.container input:checked ~ .checkmark {
@@ -195,7 +207,7 @@
 		top: 3px;
 		width: 4px;
 		height: 9px;
-		border: solid white;
+		border: solid var(--base);
 		border-width: 0 3px 3px 0;
 		transform: rotate(45deg);
 	}
