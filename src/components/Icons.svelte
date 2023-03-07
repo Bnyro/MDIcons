@@ -158,7 +158,7 @@
 	#icons span {
 		padding: 1rem;
 		margin: 0.5rem;
-		width: clamp(6rem, 10vw, 40rem);
+		width: clamp(6rem, 7vw, 30rem);
 		background-color: var(--surface);
 		border-radius: 1rem;
 		display: flex;
