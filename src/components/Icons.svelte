@@ -123,7 +123,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		max-width: min(90rem, calc(100% - 3rem));
+		max-width: min(90rem, calc(100% - 0.5rem));
 		margin: 0 auto;
 	}
 
@@ -136,13 +136,17 @@
 		padding: 0 1.5rem;
 	}
 
+	#filters {
+		flex-wrap: wrap;
+		margin-bottom: 0.5rem;
+	}
+
 	#filters input[type='text'] {
 		flex-grow: 1;
 	}
 
 	#filters > * {
-		margin-left: 0.5rem;
-		margin-right: 0.5rem;
+		margin: 0.5rem;
 	}
 
 	#icons {
@@ -154,7 +158,7 @@
 	#icons span {
 		padding: 1rem;
 		margin: 0.5rem;
-		width: 8rem;
+		width: clamp(6rem, 10vw, 40rem);
 		background-color: var(--surface);
 		border-radius: 1rem;
 		display: flex;
