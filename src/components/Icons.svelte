@@ -128,31 +128,32 @@
 	}
 
 	#filters {
-		box-sizing: border-box;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		padding: 0 1.5rem;
+		padding: 0 2.5rem;
+		gap: 1rem;
 	}
 
-	#filters {
-		flex-wrap: wrap;
-		margin-bottom: 0.5rem;
+	#filters > * {
+		height: 3rem !important;
 	}
 
 	#filters input[type='text'] {
 		flex-grow: 1;
-	}
-
-	#filters > * {
-		margin: 0.5rem;
+		min-width: 15rem;
 	}
 
 	#icons {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+	}
+
+	#icons * {
+		box-sizing: content-box;
 	}
 
 	#icons span {

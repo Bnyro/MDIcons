@@ -1,8 +1,15 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
 :root {
 	--base: #191724;
 	--text: #e0def4;
 	--surface: #26233a;
 	--accent: #ebbcba;
+	--radius: 1rem;
 	--filter: invert(88%) sepia(14%) saturate(665%) hue-rotate(143deg) brightness(90%) contrast(86%);
 }
 
@@ -16,7 +23,7 @@ input[type='text'] {
 	margin: 1rem 0;
 	padding: 1rem;
 	width: 30%;
-	border-radius: 1rem;
+	border-radius: var(--radius);
 	background-color: var(--surface);
 	border: none;
 	outline: none;
@@ -24,14 +31,13 @@ input[type='text'] {
 }
 
 input[type='range'] {
-	border-radius: 1rem;
+	border-radius: var(--radius);
 	-webkit-appearance: none;
 	appearance: none;
-	padding: 0.5rem;
+	padding: 0.5rem 1rem;
 	background: var(--surface);
 	outline: none;
 	opacity: 0.7;
-	-webkit-transition: 0.2s;
 	transition: opacity 0.2s;
 }
 
@@ -46,7 +52,7 @@ input[type='range']::-moz-range-thumb {
 	appearance: none;
 	padding: 0.2rem;
 	background: var(--accent);
-	border-radius: 1rem;
+	border-radius: calc(var(--radius) / 2);
 }
 
 /* Checkbox input */
@@ -73,10 +79,10 @@ input[type='range']::-moz-range-thumb {
 }
 
 .checkmark {
-	margin-top: 5px;
 	position: absolute;
-	top: 0;
+	top: 50%;
 	left: 0;
+	transform: translate(0, -50%);
 	height: 20px;
 	width: 20px;
 	background-color: var(--surface);
@@ -115,7 +121,7 @@ select {
 	appearance: none;
 	border: none;
 	padding: 0.5rem 1rem;
-	border-radius: 1rem;
+	border-radius: var(--radius);
 	background-color: var(--surface);
 	margin: 0;
 	font-family: inherit;
